@@ -1,3 +1,10 @@
+
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 Till tech test
 ==============
 
@@ -8,13 +15,13 @@ Specification
 
 This is what a sample receipt looks like:
 
-![a receipt](../images/receipt.jpg)
+![a receipt](https://www.dropbox.com/s/54606e6ie75us2y/receipt.jpg?raw=1)
 
 
 Version 1
 ---------
 
-Implement a system that contains the business logic to produce receipts similar to this, based on a `json` price list and test orders. A sample `.json` [file](hipstercoffee.json) has been provided with the list of products sold at this particular coffee shop. 
+Implement a system that contains the business logic to produce receipts similar to this, based on a `json` price list and test orders. A sample `.json` [file](hipstercoffee.json) has been provided with the list of products sold at this particular coffee shop.
 
 Here are some sample orders you can try - whether you use this information is up to you:
 

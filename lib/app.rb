@@ -17,6 +17,7 @@ class Shop
     # @spend_amt_before_discount
   end
 
+
   def general_discount(spend_amt)
     @spend_amt_before_discount = spend_amt
   end

@@ -15,7 +15,7 @@ Specification
 
 This is what a sample receipt looks like:
 
-![a receipt](https://www.dropbox.com/s/54606e6ie75us2y/receipt.jpg?raw=1)
+![a receipt](src="https://www.dropbox.com/s/54606e6ie75us2y/receipt.jpg?raw=1")
 
 
 Version 1

@@ -6,7 +6,7 @@ class Shop
   attr_reader :shopname, :address, :phone, :prices, :basket, :total_owed,
   :receipt
 
-  def initialize(details_file)
+  def initialize(details_file)            # No need to check for duplicates in a hash
     file = File.read(details_file)
     data_hash = JSON.parse(file)          #Array of hash
     @shopname = data_hash[0]["shopName"]
@@ -46,6 +46,8 @@ class Shop
     @basket.each{|item|
       description = item[0]
       price = @prices[0][item[0]]
+      discounted_price = discount(description,price)
+      discounted_price ? price = discounted_price : price = price
       quantity = item[1]
       @total_owed += (price * quantity).round(2)
       create_receipt(description,quantity,price)
@@ -55,6 +57,17 @@ class Shop
   private
   def create_receipt(description,quantity,price)
     @receipt << [description, quantity, price]
+  end
+
+  def discount(description,price)
+    # p @discount_table
+    if get_discount_data(description)
+      discount = @discount_table[description][0]
+      # print "A discount of #{discount}% applies to: #{description}"
+      return price = (price - (price * discount/100.0)).round(2)
+      # p price
+    end
+    return false
   end
 
 end

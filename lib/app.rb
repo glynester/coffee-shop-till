@@ -35,6 +35,7 @@ class Shop
   end
 
   def add_item(item, quantity)
+    raise "\"#{item}\" is not sold at #{@shopname}" unless @prices[0].key?(item)
     @basket << [item, quantity]
   end
 

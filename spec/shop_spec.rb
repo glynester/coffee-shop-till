@@ -33,6 +33,11 @@ describe Shop do
       expect(shop.basket[0]).to eq ["Blueberry Muffin", 6]
     end
 
+    it 'does not allow items to be added that are not sold' do
+      shop = Shop.new("./spec/test.json")
+      expect{shop.add_item("Blackberry Muffin",6)}.to raise_error("\"Blackberry Muffin\" is not sold at Test Company")
+    end
+
   end
 
 

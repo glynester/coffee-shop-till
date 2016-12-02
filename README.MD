@@ -1,3 +1,6 @@
+##**BRIEF:**  
+See "Till tech test" below.
+
 ##**APPROACH:**  
 This app is built using Ruby.  
 Interaction is via IRB.  

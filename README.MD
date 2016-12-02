@@ -1,6 +1,15 @@
 
 
-##Script
+##Script  
+6 * Blueberry Muffin & £4.05 (New price =  £3.81 after 6% discount)  
+4 * Tea @ £3.65  
+2 * Affogato @ £14.80  
+67.06       (Total after individual discount on Blueberry Muffin)  
+3.35        (Less: Discount on spend above £50 = 5%)  
+5.5         (Add: Tax at 8.64%)  
+69.21       (Total bill)  
+
+
 ```
 load './lib/app.rb'
 shop = Shop.new("./spec/test.json")  

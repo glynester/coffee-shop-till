@@ -57,7 +57,7 @@ describe Shop do
   end
 
   context 'Finalise the bill' do
-      it 'correctly calculates the discount' do
+      it 'correctly calculates individual item discount' do
         shop = Shop.new("./spec/test.json")
         shop.make_discount_table("Cafe Latte",4,"1/1/2016","N/A")
         shop.make_discount_table("Americano",5,"15/11/2016","31/12/2016")
@@ -66,7 +66,18 @@ describe Shop do
         shop.add_item("Tea",4)
         shop.add_item("Affogato",2)
         shop.calculate_bill
+        expect(shop.receipt[0]).to eq(["Blueberry Muffin", 6, 3.81])
         expect(shop.total_owed).to eq(67.06)
+      end
+
+      it 'correctly calculates individual item discount' do
+        shop = Shop.new("./spec/test.json")
+        shop.general_discount(50)    # Discount is 5%
+        shop.add_item("Blueberry Muffin",6)
+        shop.add_item("Tea",4)
+        shop.add_item("Affogato",2)
+        shop.calculate_bill
+        expect(shop.total_owed).to eq(65.08)
       end
   end
 

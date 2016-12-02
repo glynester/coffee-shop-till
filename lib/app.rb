@@ -60,12 +60,10 @@ class Shop
   end
 
   def discount(description,price)
-    # p @discount_table
+    #This needs to be expanded to see if it discount is still valid
     if get_discount_data(description)
       discount = @discount_table[description][0]
-      # print "A discount of #{discount}% applies to: #{description}"
       return price = (price - (price * discount/100.0)).round(2)
-      # p price
     end
     return false
   end

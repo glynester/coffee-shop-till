@@ -19,6 +19,8 @@ class Shop
     @receipt = []
     @general_discount = 0
     @spend_amt_before_discount = 0
+    @spend_amt_after_discount = 0     # Not yet used!
+    @total_tax = 0
     @total_owed = 0
   end
 
@@ -33,7 +35,7 @@ class Shop
     @discount_percent = discount_percent
     start_date == "N/A" ? start_date = start_date : start_date = Date.strptime(start_date,"%d/%m/%Y")
     end_date == "N/A" ? start_date = end_date : end_date = Date.strptime(end_date, "%d/%m/%Y")
-    raise "Start date must be before end date" if ((start_date != "N/A" && end_date != "N/A")&&(start_date > end_date)) #  Value must be date or "N/A" only
+    raise "Start date must be before end date" if ((start_date != "N/A" && end_date != "N/A")&&(start_date > end_date)) #  Value must be date (".instance_of?(Date)") or "N/A" only
     @discount_table[@discount_item] = [@discount_percent, start_date, end_date]
   end
 
@@ -55,15 +57,25 @@ class Shop
       discounted_price ? price = discounted_price : price = price
       quantity = item[1]
       @total_owed += (price * quantity).round(2)
-      create_receipt(description,quantity,price)
+      create_receipt_item(description,quantity,price)
     }
     @total_owed > @spend_amt_before_discount ?
     @total_owed -= (@total_owed * @general_discount/100.0).round(2) : @total_owed += 0
-    @total_owed = (@total_owed + (@total_owed * CONSUMER_TAX_RATE/100.0)).round(2)
+    @total_tax = (@total_owed * CONSUMER_TAX_RATE/100.0).round(2)
+    @total_owed = (@total_owed + @total_tax).round(2)
+  end
+
+  def show_receipt
+    @receipt.each{|item|
+      print "#{item[0]}, #{item[1]}, #{item[2]}\n"   #Will change spacing later!!!
+    }
+    print "Discount #{@general_discount}\n" if @general_discount != 0
+    print "Tax #{@total_tax}\n"
+    print "Total  #{@total_owed}\n"
   end
 
   private
-  def create_receipt(description,quantity,price)
+  def create_receipt_item(description,quantity,price)
     @receipt << [description, quantity, price]
   end
 

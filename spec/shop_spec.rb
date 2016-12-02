@@ -80,7 +80,7 @@ describe Shop do
         expect(shop.total_owed).to eq(26.4)
       end
 
-      #Test still required :
+      #Tests still required :
       # 1) Start date must be before end date.
       # 2) start date and end date (valid)
       # 3) start date and end date (end date is passed)(start date has not been reached)

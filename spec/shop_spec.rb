@@ -25,6 +25,15 @@ describe Shop do
 
   end
 
+  context 'Adding items to the basket of items' do
+    it 'allows items to be added' do
+      shop = Shop.new("./spec/test.json")
+      shop.add_item("Blueberry Muffin",6)
+      shop.add_item("Blueberry Muffin",6)
+      expect(shop.basket[0]).to eq ["Blueberry Muffin", 6]
+    end
+
+  end
 
 
 

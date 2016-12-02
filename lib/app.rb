@@ -3,7 +3,7 @@ require 'date'
 
 class Shop
 
-  attr_reader :shopname, :address, :phone, :prices
+  attr_reader :shopname, :address, :phone, :prices, :basket
 
   def initialize(details_file)
     file = File.read(details_file)
@@ -13,10 +13,7 @@ class Shop
     @phone = data_hash[0]["phone"]        #Array of hash
     @prices = data_hash[0]["prices"]      #Array of hash
     @discount_table = {}
-    # @discount_item = ""
-    # @discount_period = [@start_date, @end_date]
-    # @discount_table = [@discount_item, @discount_period]
-    # @spend_amt_before_discount
+    @basket = []
   end
 
 
@@ -37,11 +34,27 @@ class Shop
     @discount_table[item]
   end
 
-end
-
-class Till
-  def initialize
-
+  def add_item(item, quantity)
+    @basket << [item, quantity]
   end
 
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#

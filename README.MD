@@ -1,3 +1,18 @@
+##**APPROACH:**  
+This app is built using Ruby.  
+Interaction is via IRB.  
+Rspec is used for testing the app.
+
+
+##**DOWNLOADING AND RUNNING CODE:**  
+
+```
+$ git clone https://github.com/glynester/coffee-shop-till
+$ cd coffee-shop-till  
+$ irb
+$ load './lib/app.rb'
+```
+Type the commands contained in the Script section into the console in an irb (or pry) session.
 
 
 ##Script  

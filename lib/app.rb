@@ -67,7 +67,7 @@ class Shop
   end
 
   def discount(description,price)
-    #This needs to be expanded to see if it discount is still valid
+    #This needs to be expanded to see if the discount is still valid (dates)
     if get_discount_data(description)
       discount = @discount_table[description][0]
       return price = (price - (price * discount/100.0)).round(2)

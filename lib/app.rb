@@ -18,6 +18,7 @@ class Shop
     @basket = []
     @receipt = []
     @general_discount = 0
+    @general_discount_amt = 0
     @spend_amt_before_discount = 0
     @spend_amt_after_discount = 0     # Not yet used!
     @total_tax = 0
@@ -59,8 +60,9 @@ class Shop
       @total_owed += (price * quantity).round(2)
       create_receipt_item(description,quantity,price)
     }
+    @general_discount_amt = (@total_owed * @general_discount/100.0).round(2)
     @total_owed > @spend_amt_before_discount ?
-    @total_owed -= (@total_owed * @general_discount/100.0).round(2) : @total_owed += 0
+    @total_owed -= @general_discount_amt : @total_owed += 0
     @total_tax = (@total_owed * CONSUMER_TAX_RATE/100.0).round(2)
     @total_owed = (@total_owed + @total_tax).round(2)
   end
@@ -69,7 +71,7 @@ class Shop
     @receipt.each{|item|
       print "#{item[0]}, #{item[1]}, #{item[2]}\n"   #Will change spacing later!!!
     }
-    print "Discount #{@general_discount}\n" if @general_discount != 0
+    print "Discount #{@general_discount_amt}\n" if @general_discount != 0
     print "Tax #{@total_tax}\n"
     print "Total  #{@total_owed}\n"
   end

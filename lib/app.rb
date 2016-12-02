@@ -1,4 +1,5 @@
 require 'json'
+require 'date'
 
 class Shop
 
@@ -11,6 +12,7 @@ class Shop
     @address = data_hash[0]["address"]    #Array of hash
     @phone = data_hash[0]["phone"]        #Array of hash
     @prices = data_hash[0]["prices"]      #Array of hash
+    @discount_table = {}
     # @discount_item = ""
     # @discount_period = [@start_date, @end_date]
     # @discount_table = [@discount_item, @discount_period]
@@ -22,11 +24,17 @@ class Shop
     @spend_amt_before_discount = spend_amt
   end
 
-  def make_discount_table(discount_item, start_date = "N/A", end_date = "N/A")
+  def make_discount_table(discount_item, discount_percent, start_date = "N/A", end_date = "N/A")
     @discount_item = discount_item
-    # start_date != "N/A"
-    @discount_period = [start_date, end_date]
-    @discount_table = [@discount_item, @discount_period]
+    @discount_percent = discount_percent
+    start_date == "N/A" ? start_date = start_date : start_date = Date.strptime(start_date,"%d/%m/%Y")
+    end_date == "N/A" ? start_date = end_date : end_date = Date.strptime(end_date, "%d/%m/%Y")
+    # @discount_period = [start_date, end_date]
+    @discount_table[@discount_item] = [@discount_percent, start_date, end_date]
+  end
+
+  def get_discount_data(item)
+    @discount_table[item]
   end
 
 end

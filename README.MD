@@ -12,8 +12,8 @@ shop.add_item("Blueberry Muffin",6)
 shop.add_item("Tea",4)  
 shop.add_item("Affogato",2)  
 shop.calculate_bill  
-print shop.receipt
-``
+print shop.receipt  
+```
 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

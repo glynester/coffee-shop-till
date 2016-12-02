@@ -53,7 +53,7 @@ describe Shop do
       shop.add_item("Affogato",2)
       shop.calculate_bill
       expect(shop.receipt[1]).to eq(["Tea", 4, 3.65])
-      expect(shop.total_owed).to eq(68.5)
+      expect(shop.total_owed).to eq(74.42)
     end
   end
 
@@ -68,7 +68,7 @@ describe Shop do
         shop.add_item("Affogato",2)
         shop.calculate_bill
         expect(shop.receipt[0]).to eq(["Blueberry Muffin", 6, 3.81])
-        expect(shop.total_owed).to eq(67.06)
+        expect(shop.total_owed).to eq(72.85)
       end
 
       it 'correctly calculates overall spend discount' do
@@ -78,14 +78,14 @@ describe Shop do
         shop.add_item("Tea",4)
         shop.add_item("Affogato",2)
         shop.calculate_bill
-        expect(shop.total_owed).to eq(65.07)
+        expect(shop.total_owed).to eq(70.69)
       end
 
       it 'correctly calculates the tax to be paid' do
         shop = Shop.new("./spec/test.json")
         shop.add_item("Blueberry Muffin",6)
         shop.calculate_bill
-        expect(shop.total_owed).to eq(25.96)
+        expect(shop.total_owed).to eq(26.4)
       end
   end
 

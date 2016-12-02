@@ -5,6 +5,7 @@ class Shop
 
   attr_reader :shopname, :address, :phone, :prices, :basket, :total_owed,
   :receipt, :general_discount
+  CONSUMER_TAX_RATE = 8.64
 
   def initialize(details_file)            # No need to check for duplicates in a hash
     file = File.read(details_file)
@@ -19,7 +20,6 @@ class Shop
     @general_discount = 0
     @spend_amt_before_discount = 0
     @total_owed = 0
-    # CONSUMER_TAX_RATE = 8.64
   end
 
 
@@ -58,6 +58,7 @@ class Shop
     }
     @total_owed > @spend_amt_before_discount ?
     @total_owed -= (@total_owed * @general_discount/100.0).round(2) : @total_owed += 0
+    @total_owed = (@total_owed + (@total_owed * CONSUMER_TAX_RATE/100.0)).round(2)
   end
 
   private

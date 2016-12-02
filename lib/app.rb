@@ -4,7 +4,7 @@ require 'date'
 class Shop
 
   attr_reader :shopname, :address, :phone, :prices, :basket, :total_owed,
-  :receipt
+  :receipt, :general_discount
 
   def initialize(details_file)            # No need to check for duplicates in a hash
     file = File.read(details_file)
@@ -16,12 +16,15 @@ class Shop
     @discount_table = {}
     @basket = []
     @receipt = []
+    @general_discount = 0
+    @spend_amt_before_discount = 0
     @total_owed = 0
   end
 
 
-  def general_discount(spend_amt)
+  def set_general_discount(spend_amt, discount_percentage)
     @spend_amt_before_discount = spend_amt
+    @general_discount = discount_percentage
   end
 
   def make_discount_table(discount_item, discount_percent, start_date = "N/A", end_date = "N/A")
@@ -52,6 +55,8 @@ class Shop
       @total_owed += (price * quantity).round(2)
       create_receipt(description,quantity,price)
     }
+    @total_owed > @spend_amt_before_discount ?
+    @total_owed -= (@total_owed * @general_discount/100.0).round(2) : @total_owed += 0
   end
 
   private

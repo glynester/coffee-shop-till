@@ -10,7 +10,8 @@ describe Shop do
 
     it 'accepts a minimum spend level for a overall discount to be applied' do
       shop = Shop.new("./spec/test.json")
-      expect(shop.general_discount(40)).to eq(40)
+      shop.set_general_discount(40,5)
+      expect(shop.general_discount).to eq(5)
     end
 
 
@@ -70,14 +71,14 @@ describe Shop do
         expect(shop.total_owed).to eq(67.06)
       end
 
-      it 'correctly calculates individual item discount' do
+      it 'correctly calculates overall spend discount' do
         shop = Shop.new("./spec/test.json")
-        shop.general_discount(50)    # Discount is 5%
+        shop.set_general_discount(50,5)    # Discount is 5%
         shop.add_item("Blueberry Muffin",6)
         shop.add_item("Tea",4)
         shop.add_item("Affogato",2)
         shop.calculate_bill
-        expect(shop.total_owed).to eq(65.08)
+        expect(shop.total_owed).to eq(65.07)
       end
   end
 

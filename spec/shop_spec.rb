@@ -29,17 +29,42 @@ describe Shop do
     it 'allows items to be added' do
       shop = Shop.new("./spec/test.json")
       shop.add_item("Blueberry Muffin",6)
-      shop.add_item("Blueberry Muffin",6)
+      shop.add_item("Americano",4)
       expect(shop.basket[0]).to eq ["Blueberry Muffin", 6]
     end
 
     it 'does not allow items to be added that are not sold' do
       shop = Shop.new("./spec/test.json")
-      expect{shop.add_item("Blackberry Muffin",6)}.to raise_error("\"Blackberry Muffin\" is not sold at Test Company")
+      expect{shop.add_item("Blackberry Pie",6)}.to raise_error("\"Blackberry Pie\" is not sold at Test Company")
+    end
+  end
+
+  context 'Added items appear in the receipt log' do
+    it 'throws an error if the basket is empty' do
+      shop = Shop.new("./spec/test.json")
+      expect{shop.calculate_bill}.to raise_error("No items in the basket")
     end
 
+    it 'shows the added item and quantity in the receipt log' do
+      shop = Shop.new("./spec/test.json")
+      shop.add_item("Blueberry Muffin",6)
+      shop.calculate_bill
+      expect(shop.receipt[0]).to eq(["Blueberry Muffin", 6, 4.05])
+      expect(shop.total_owed).to eq(24.3)
+    end
   end
 
 
-
 end
+
+
+
+
+
+
+
+
+
+
+
+#

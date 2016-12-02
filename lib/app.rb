@@ -3,17 +3,20 @@ require 'date'
 
 class Shop
 
-  attr_reader :shopname, :address, :phone, :prices, :basket
+  attr_reader :shopname, :address, :phone, :prices, :basket, :total_owed,
+  :receipt
 
   def initialize(details_file)
     file = File.read(details_file)
-    data_hash = JSON.parse(file)
-    @shopname = data_hash[0]["shopName"]  #Array of hash
-    @address = data_hash[0]["address"]    #Array of hash
-    @phone = data_hash[0]["phone"]        #Array of hash
-    @prices = data_hash[0]["prices"]      #Array of hash
+    data_hash = JSON.parse(file)          #Array of hash
+    @shopname = data_hash[0]["shopName"]
+    @address = data_hash[0]["address"]
+    @phone = data_hash[0]["phone"]
+    @prices = data_hash[0]["prices"]
     @discount_table = {}
     @basket = []
+    @receipt = []
+    @total_owed = 0
   end
 
 
@@ -26,7 +29,6 @@ class Shop
     @discount_percent = discount_percent
     start_date == "N/A" ? start_date = start_date : start_date = Date.strptime(start_date,"%d/%m/%Y")
     end_date == "N/A" ? start_date = end_date : end_date = Date.strptime(end_date, "%d/%m/%Y")
-    # @discount_period = [start_date, end_date]
     @discount_table[@discount_item] = [@discount_percent, start_date, end_date]
   end
 
@@ -37,6 +39,21 @@ class Shop
   def add_item(item, quantity)
     raise "\"#{item}\" is not sold at #{@shopname}" unless @prices[0].key?(item)
     @basket << [item, quantity]
+  end
+
+  def calculate_bill
+    raise "No items in the basket" if @basket.empty?
+    @basket.each{|item|
+      @total_owed += (4.05 * item[1]).round(2)
+      create_receipt(item)
+    }
+    @receipt
+    p @prices
+  end
+
+  private
+  def create_receipt(item)
+    @receipt << [item[0], item[1], @prices[0][item[0]]]
   end
 
 end

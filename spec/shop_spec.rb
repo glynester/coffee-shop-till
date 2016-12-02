@@ -58,7 +58,7 @@ describe Shop do
   end
 
   context 'Finalise the bill' do
-      it 'correctly calculates individual item discount' do
+      it 'correctly calculates individual item discount (no start date for discount period)' do
         shop = Shop.new("./spec/test.json")
         shop.make_discount_table("Cafe Latte",4,"1/1/2016","N/A")
         shop.make_discount_table("Americano",5,"15/11/2016","31/12/2016")

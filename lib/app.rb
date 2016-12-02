@@ -68,9 +68,18 @@ class Shop
 
   def discount(description,price)
     #This needs to be expanded to see if the discount is still valid (dates)
+    # p @discount_table
     if get_discount_data(description)
-      discount = @discount_table[description][0]
-      return price = (price - (price * discount/100.0)).round(2)
+      start_date =  @discount_table[description][1]
+      end_date =  @discount_table[description][2]
+      today = DateTime.now #Time.now.strftime("%d/%m/%Y")
+      if (start_date == "N/A" && (end_date.instance_of?(Date) && today < end_date)) ||
+        ((start_date.instance_of?(Date) && today > start_date) && end_date == "N/A") ||
+        ((start_date.instance_of?(Date) && today > start_date) && (end_date.instance_of?(Date) && today < end_date)) ||
+        (start_date == "N/A" && end_date == "N/A")
+          discount = @discount_table[description][0]
+          return price = (price - (price * discount/100.0)).round(2)
+      end
     end
     return false
   end

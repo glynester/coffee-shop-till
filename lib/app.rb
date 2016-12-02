@@ -33,6 +33,7 @@ class Shop
     @discount_percent = discount_percent
     start_date == "N/A" ? start_date = start_date : start_date = Date.strptime(start_date,"%d/%m/%Y")
     end_date == "N/A" ? start_date = end_date : end_date = Date.strptime(end_date, "%d/%m/%Y")
+    raise "Start date must be before end date" if ((start_date != "N/A" && end_date != "N/A")&&(start_date > end_date)) #  Value must be date or "N/A" only
     @discount_table[@discount_item] = [@discount_percent, start_date, end_date]
   end
 
@@ -67,12 +68,10 @@ class Shop
   end
 
   def discount(description,price)
-    #This needs to be expanded to see if the discount is still valid (dates)
-    # p @discount_table
     if get_discount_data(description)
       start_date =  @discount_table[description][1]
       end_date =  @discount_table[description][2]
-      today = DateTime.now #Time.now.strftime("%d/%m/%Y")
+      today = DateTime.now
       if (start_date == "N/A" && (end_date.instance_of?(Date) && today < end_date)) ||
         ((start_date.instance_of?(Date) && today > start_date) && end_date == "N/A") ||
         ((start_date.instance_of?(Date) && today > start_date) && (end_date.instance_of?(Date) && today < end_date)) ||

@@ -58,7 +58,7 @@ describe Shop do
   end
 
   context 'Finalise the bill' do
-      it 'correctly calculates individual item discount (no start date for discount period)' do
+      it 'correctly calculates individual item discount (no start date but end date for discount period)' do
         shop = Shop.new("./spec/test.json")
         shop.make_discount_table("Cafe Latte",4,"1/1/2016","N/A")
         shop.make_discount_table("Americano",5,"15/11/2016","31/12/2016")
@@ -70,6 +70,23 @@ describe Shop do
         expect(shop.receipt[0]).to eq(["Blueberry Muffin", 6, 3.81])
         expect(shop.total_owed).to eq(72.85)
       end
+
+      it 'individual item discount throws error (no start date but end date for discount period has passed)' do
+        shop = Shop.new("./spec/test.json")
+        shop.make_discount_table("Blueberry Muffin",6,"N/A","1/6/2016") #Past date
+        shop.add_item("Blueberry Muffin",6)
+        shop.calculate_bill
+        expect(shop.receipt[0]).to eq(["Blueberry Muffin", 6, 4.05])
+        expect(shop.total_owed).to eq(26.4)
+      end
+
+      #Test still required :
+      # 1) Start date must be before end date.
+      # 2) start date and end date (valid)
+      # 3) start date and end date (end date is passed)(start date has not been reached)
+      # 4) start date but no end date (valid)
+      # 5) start date but no end date (date us before start date)
+      # 6) no start date and no end date (all are valid)
 
       it 'correctly calculates overall spend discount' do
         shop = Shop.new("./spec/test.json")

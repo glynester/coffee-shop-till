@@ -1,6 +1,13 @@
 
 
 ##Script  
+Creates a shop from a json file    
+Create a table of discounted items  
+Sets a general spend discount  
+Adds items and quantities  
+Calculates the bill  
+Prints a receipt  
+
 6 * Blueberry Muffin & £4.05 (New price =  £3.81 after 6% discount)  
 4 * Tea @ £3.65  
 2 * Affogato @ £14.80  

@@ -11,7 +11,7 @@ Rspec is used for testing the app.
 
 ```
 $ git clone https://github.com/glynester/coffee-shop-till
-$ cd coffee-shop-till  
+$ cd Coffee-Shop-Till  
 $ irb
 $ load './lib/app.rb'
 ```

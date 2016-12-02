@@ -19,6 +19,7 @@ class Shop
     @general_discount = 0
     @spend_amt_before_discount = 0
     @total_owed = 0
+    # CONSUMER_TAX_RATE = 8.64
   end
 
 

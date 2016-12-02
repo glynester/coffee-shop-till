@@ -80,6 +80,13 @@ describe Shop do
         shop.calculate_bill
         expect(shop.total_owed).to eq(65.07)
       end
+
+      it 'correctly calculates the tax to be paid' do
+        shop = Shop.new("./spec/test.json")
+        shop.add_item("Blueberry Muffin",6)
+        shop.calculate_bill
+        expect(shop.total_owed).to eq(25.96)
+      end
   end
 
 

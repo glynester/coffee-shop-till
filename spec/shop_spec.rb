@@ -45,12 +45,14 @@ describe Shop do
       expect{shop.calculate_bill}.to raise_error("No items in the basket")
     end
 
-    it 'shows the added item and quantity in the receipt log' do
+    it 'shows the added item purchased details in the receipt log and updates the total cost' do
       shop = Shop.new("./spec/test.json")
       shop.add_item("Blueberry Muffin",6)
+      shop.add_item("Tea",4)
+      shop.add_item("Affogato",2)
       shop.calculate_bill
-      expect(shop.receipt[0]).to eq(["Blueberry Muffin", 6, 4.05])
-      expect(shop.total_owed).to eq(24.3)
+      expect(shop.receipt[1]).to eq(["Tea", 4, 3.65])
+      expect(shop.total_owed).to eq(68.5)
     end
   end
 

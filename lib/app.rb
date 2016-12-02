@@ -44,16 +44,17 @@ class Shop
   def calculate_bill
     raise "No items in the basket" if @basket.empty?
     @basket.each{|item|
-      @total_owed += (4.05 * item[1]).round(2)
-      create_receipt(item)
+      description = item[0]
+      price = @prices[0][item[0]]
+      quantity = item[1]
+      @total_owed += (price * quantity).round(2)
+      create_receipt(description,quantity,price)
     }
-    @receipt
-    p @prices
   end
 
   private
-  def create_receipt(item)
-    @receipt << [item[0], item[1], @prices[0][item[0]]]
+  def create_receipt(description,quantity,price)
+    @receipt << [description, quantity, price]
   end
 
 end

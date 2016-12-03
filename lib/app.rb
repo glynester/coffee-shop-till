@@ -68,12 +68,15 @@ class Shop
   end
 
   def show_receipt
+    desc_col = 20; qty_col = 3; price_col = 7;
+    spacer = desc_col + qty_col
     @receipt.each{|item|
-      print "#{item[0]}, #{item[1]}, #{item[2]}\n"   #Will change spacing later!!!
+      desc = item[0]; qty = item[1]; price = item[2];
+      printf("%-#{spacer}s %#{price_col}s\n",desc.slice(0,20),qty.to_s + ' * ' + price.to_s)
     }
-    print "Discount #{@general_discount_amt}\n" if @general_discount != 0
-    print "Tax #{@total_tax}\n"
-    print "Total  #{@total_owed}\n"
+    printf("%-#{spacer}s%#{price_col}s\n","Discount",@general_discount_amt) if @general_discount != 0
+    printf("%-#{spacer}s%#{price_col}s\n","Tax",@total_tax)
+    printf("%-#{spacer}s%#{price_col}s\n","Total",@total_owed)
   end
 
   private

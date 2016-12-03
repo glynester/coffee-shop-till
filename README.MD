@@ -15,8 +15,8 @@ I assumed a discount system where certain items are discounted by a given percen
 | Americano          | 5            | 15/11/2016    | 31/12/2016     |
 | Blueberry Muffin   | 6            | N/A           | 1/6/2017       |
 
-The system checks if a discount is applicable to a product by verifying that the current date is within the discount period parameters.
-The shop owner can leave parameters empty by entering "N/A".
+The system checks if a discount is applicable to a product by verifying that the current date is within the discount period parameters.  
+The shop owner can leave parameters empty by entering "N/A".  
 If a parameter is empty, then it will not be evaluated.   
 
 
@@ -44,21 +44,6 @@ Type the commands contained in the Script section into the console in an irb (or
 
 
 ##Script  
-Creates a shop from a json file    
-Create a table of discounted items  
-Sets a general spend discount    
-Adds items and quantities  
-Calculates the bill  
-Prints a receipt  
-
-6 * Blueberry Muffin & £4.05 (New price =  £3.81 after 6% discount)  
-4 * Tea @ £3.65  
-2 * Affogato @ £14.80  
-67.06       (Total after individual discount on Blueberry Muffin)  
-3.35        (Less: Discount on spend above £50 = 5%)  
-5.5         (Add: Tax at 8.64%)  
-69.21       (Total bill)  
-
 
 ```
 load './lib/app.rb'
@@ -73,7 +58,20 @@ shop.add_item("Affogato",2)
 shop.calculate_bill  
 print shop.show_receipt  
 ```
+Creates a shop from a json file    
+Create a table of discounted items  
+Sets a general spend discount    
+Adds items and quantities  
+Calculates the bill  
+Prints a receipt  
 
+6 * Blueberry Muffin & £4.05 (New price =  £3.81 after 6% discount)  
+4 * Tea @ £3.65  
+2 * Affogato @ £14.80  
+67.06       (Total after individual discount on Blueberry Muffin)  
+3.35        (Less: Discount on spend above £50 = 5%)  
+5.5         (Add: Tax at 8.64%)  
+69.21       (Total bill)  
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

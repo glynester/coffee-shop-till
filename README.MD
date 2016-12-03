@@ -6,6 +6,25 @@ This app is built using Ruby.
 Interaction is via IRB.  
 Rspec is used for testing the app.
 
+##**NOTES:**
+I assumed a discount system where certain items are discounted by a given percentage for a given period. The format of this is as follows:  
+
+| Product            | Discount %   | Start Date    | End Date       |
+| ------------------ | :----------: | :-----------: | :------------: |
+| Cafe Latte         | 4            | 1/1/2016      | N/A            |
+| Americano          | 5            | 15/11/2016    | 31/12/2016     |
+| Blueberry Muffin   | 6            | N/A           | 1/6/2017       |
+
+There is also a general discount system. The format of this is as follows:
+
+| Spend Amount   | Discount %      |
+| :------------: | :-------------: |
+| 50             | 5               |
+
+This will give a 5% discount if the total bill exceeds £50.  
+
+Currently the system does not cater for a voucher provided by a customer.  
+Currently the system does not take payment from a customer and give change.  
 
 ##**DOWNLOADING AND RUNNING CODE:**  
 
@@ -21,7 +40,7 @@ Type the commands contained in the Script section into the console in an irb (or
 ##Script  
 Creates a shop from a json file    
 Create a table of discounted items  
-Sets a general spend discount  
+Sets a general spend discount - if this is omitted from the script, the receipt will exclude the discount line.    
 Adds items and quantities  
 Calculates the bill  
 Prints a receipt  

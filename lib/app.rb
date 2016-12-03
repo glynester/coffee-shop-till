@@ -74,9 +74,9 @@ class Shop
       desc = item[0]; qty = item[1]; price = item[2];
       printf("%-#{spacer}s %#{price_col}s\n",desc.slice(0,20),qty.to_s + ' * ' + price.to_s)
     }
-    printf("%-#{spacer}s%#{price_col}s\n","Discount",@general_discount_amt) if @general_discount != 0
-    printf("%-#{spacer}s%#{price_col}s\n","Tax",@total_tax)
-    printf("%-#{spacer}s%#{price_col}s\n","Total",@total_owed)
+    printf("%-#{spacer}s%#{price_col}.2f\n","Discount",@general_discount_amt) if @general_discount != 0
+    printf("%-#{spacer}s%#{price_col}.2f\n","Tax",@total_tax)
+    printf("%-#{spacer}s%#{price_col}.2f\n","Total",@total_owed)
   end
 
   private

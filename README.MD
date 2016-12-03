@@ -15,6 +15,11 @@ I assumed a discount system where certain items are discounted by a given percen
 | Americano          | 5            | 15/11/2016    | 31/12/2016     |
 | Blueberry Muffin   | 6            | N/A           | 1/6/2017       |
 
+The system checks if a discount is applicable to a product by verifying that the current date is within the discount period parameters.
+The shop owner can leave parameters empty by entering "N/A".
+If a parameter is empty, then it will not be evaluated.   
+
+
 There is also a general discount system. The format of this is as follows:
 
 | Spend Amount   | Discount %      |
@@ -22,6 +27,7 @@ There is also a general discount system. The format of this is as follows:
 | 50             | 5               |
 
 This will give a 5% discount if the total bill exceeds £50.  
+If no general discount is given, the discount item will be omitted from the receipt.  
 
 Currently the system does not cater for a voucher provided by a customer.  
 Currently the system does not take payment from a customer and give change.  
@@ -40,7 +46,7 @@ Type the commands contained in the Script section into the console in an irb (or
 ##Script  
 Creates a shop from a json file    
 Create a table of discounted items  
-Sets a general spend discount - if this is omitted from the script, the receipt will exclude the discount line.    
+Sets a general spend discount    
 Adds items and quantities  
 Calculates the bill  
 Prints a receipt  
